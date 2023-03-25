@@ -1,0 +1,21 @@
+.resultsList {
+  background-color: white;
+  width: 98%;
+  margin: 5px;
+  border-radius: 4px;
+  max-height: 40vh;
+  overflow-y: scroll;
+}
+
+.result {
+  /* list-style-type: none; */
+  /* border: 1px solid black; */
+  /* border-collapse: collapse; */
+  padding:6px 12px;
+  margin-left: 0;
+}
+
+.result:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
