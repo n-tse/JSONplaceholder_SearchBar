@@ -29,6 +29,7 @@ function App() {
             isResultClicked={isResultClicked}
             setIsResultClicked={setIsResultClicked}
             setClickedUser={setClickedUser}
+            setSearchTerm={setSearchTerm}
           />
         )}
         {isResultClicked && searchTerm && (
