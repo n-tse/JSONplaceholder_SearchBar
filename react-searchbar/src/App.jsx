@@ -20,8 +20,10 @@ function App() {
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          filteredData={filteredData}
           setFilteredData={setFilteredData}
           setIsResultClicked={setIsResultClicked}
+          setClickedUser={setClickedUser}
         />
         {searchTerm && !isResultClicked && (
           <SearchResultsList

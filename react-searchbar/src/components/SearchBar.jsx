@@ -3,13 +3,19 @@ import "../css/SearchBar.css";
 
 import { FaSearch, FaTimes } from "react-icons/fa";
 
-
-export const SearchBar = ({ searchTerm, setSearchTerm, setFilteredData, setIsResultClicked }) => {
+export const SearchBar = ({
+  searchTerm,
+  setSearchTerm,
+  filteredData,
+  setFilteredData,
+  setIsResultClicked,
+  setClickedUser,
+}) => {
   // const [searchTerm, setSearchTerm] = useState("");
   const [resData, setResData] = useState([]);
   // const [filteredData, setFilteredData] = useState([]);
   console.log(resData);
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,9 +26,24 @@ export const SearchBar = ({ searchTerm, setSearchTerm, setFilteredData, setIsRes
     !target.value && setIsResultClicked(false);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      if (filteredData.length === 1) {
+        setClickedUser(filteredData[0]);
+        setSearchTerm(filteredData[0].name);
+        setIsResultClicked(true);
+      }
+    } else {
+      setIsResultClicked(false);
+    }
+  };
+
   const filterData = (searchValue) => {
     const filtered = resData.filter((person) => {
-      return person.name.toLowerCase().includes(searchValue.toLowerCase()) || person.username.toLowerCase().includes(searchValue.toLowerCase());
+      return (
+        person.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        person.username.toLowerCase().includes(searchValue.toLowerCase())
+      );
     });
     setFilteredData(filtered);
   };
@@ -39,7 +60,7 @@ export const SearchBar = ({ searchTerm, setSearchTerm, setFilteredData, setIsRes
   const clearInput = () => {
     setSearchTerm("");
     setIsResultClicked(false);
-  }
+  };
 
   return (
     <>
@@ -50,8 +71,13 @@ export const SearchBar = ({ searchTerm, setSearchTerm, setFilteredData, setIsRes
           placeholder="Type to search..."
           value={searchTerm}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
-        <FaTimes id="x-icon" style={!searchTerm && {visibility: "hidden"}} onClick={clearInput}/>
+        <FaTimes
+          id="x-icon"
+          style={!searchTerm && { visibility: "hidden" }}
+          onClick={clearInput}
+        />
       </div>
       {/* <ul>
         {searchTerm &&
